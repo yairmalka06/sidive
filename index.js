@@ -6,7 +6,7 @@ const superagent = require("superagent");
 
 const search = require("yt-search");
 
-const TOKEN = "NDY4ODA1MTY0NTI2OTkzNDE4.DlCXOw.X8KRODbj2kqR4a4lh433z8FlcrA";
+const TOKEN = process.env.TOKEN;
 
 const YTDL = require("ytdl-core");
 
