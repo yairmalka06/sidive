@@ -6,6 +6,8 @@ const superagent = require("superagent");
 
 const search = require("yt-search");
 
+const TOKEN = process.env.TOKEN;
+
 const YTDL = require("ytdl-core");
 
 const fs = require("fs");
@@ -136,6 +138,6 @@ bot.on("message", function(message){
     console.log(`${message.author.tag} a utilisé la commande ${cmd}`);}
 
         });
-bot.login(process.env.TOKEN);
+bot.login();
 
            
