@@ -112,7 +112,7 @@ bot.on("message", function(message){
     ownerID: ownerID,
     active: active
   }
-  let commandFile = require(`./commands/${cmd}.js`);
+  let commandFile = require(`commands/${cmd}.js`);
   commandFile.run(bot, message, args, ops);
 
   } catch (e) {
