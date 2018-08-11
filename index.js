@@ -101,7 +101,7 @@ bot.on("message", function(message){
  });
  	let msg = message.content.toUpperCase();
 	let sender=message.author;
-	let args = message.content.slice(prefix.length).trim().split(' ');
+	let args = message.content.slice(PREFIX.length).trim().split(' ');
   let cmd = args.shift().toLowerCase();
 	if (message.channel.type==="dm") return;
   if (!msg.startsWith(prefix)) return;
