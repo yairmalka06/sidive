@@ -101,26 +101,25 @@ bot.on("message", function(message){
  fs.writeFile("./xp.json", JSON.stringify(xp), (err) => {
    if(err) console.log(err)
  });
- let msg = message.content.toUpperCase();
- let sender =message.author;
- let args = message.content.slice(PREFIX.length).trim().split(' ');
- let cmd = args.shift().toLowerCase();
- if (message.channel.type==="dm") return;
- if (!msg.startsWith(PREFIX)) return;
- if (message.author.bot) return;
+ 	let msg = message.content.toUpperCase();
+	let sender=message.author;
+	let args = message.content.slice(prefix.length).trim().split(' ');
+  let cmd = args.shift().toLowerCase();
+	if (message.channel.type==="dm") return;
+  if (!msg.startsWith(prefix)) return;
+	if (message.author.bot) return;
  try {
   delete require.cache[require.resolve(`./commands/${cmd}.js`)];
   let ops = {
     ownerID: ownerID,
     active: active
   }
-  let commandFile = require(`commands/${cmd}.js`);
-  commandFile.run(bot, message, args, ops);
+  let commandFile = require(`./commands/${cmd}.js`);
+  commandFile.run(client, message, args, ops);
 
   } catch (e) {
   console.log(e.stack);
   }  finally {
     console.log(`${message.author.tag} a utilisé la commande ${cmd}`);}
-
         });
 bot.login(TOKEN);
