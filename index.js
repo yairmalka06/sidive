@@ -12,8 +12,6 @@ const fs = require("fs");
 
 const ms = require("ms");
 
-const TOKEN = "NDY4ODA1MTY0NTI2OTkzNDE4.DjDBtg.PS7-6wSadb_4Y70W23jNg3j6r7M";
-
 const PREFIX = "!";
 
 /* global Map*/
@@ -138,6 +136,6 @@ bot.on("message", function(message){
     console.log(`${message.author.tag} a utilisé la commande ${cmd}`);}
 
         });
-bot.login(TOKEN);
+bot.login(process.env.TOKEN);
 
            
