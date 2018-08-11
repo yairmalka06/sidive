@@ -24,16 +24,9 @@ const fortnite = require('fortnite');
 var ownerID = "279353707567644693";
 
 var bot = new Discord.Client();
-
-bot.commands = new Discord.Collection();
 var ownerID = "279353707567644693"
 
 let xp = require("./xp.json");
-
-jsfile.forEach((f, i) =>{
-  let props = require(`./commands/${f}`);
-  console.log(`${f} loaded!`);
-});
   bot .on("guildMemberAdd",function(member)
 {
           var mem = member.user;
