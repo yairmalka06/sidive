@@ -104,7 +104,7 @@ bot.on("message", function(message){
 	let args = message.content.slice(PREFIX.length).trim().split(' ');
   let cmd = args.shift().toLowerCase();
 	if (message.channel.type==="dm") return;
-  if (!msg.startsWith(prefix)) return;
+  if (!msg.startsWith(PREFIX)) return;
 	if (message.author.bot) return;
  try {
   delete require.cache[require.resolve(`./commands/${cmd}.js`)];
