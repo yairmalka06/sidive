@@ -34,7 +34,6 @@ jsfile.forEach((f, i) =>{
   let props = require(`./commands/${f}`);
   console.log(`${f} loaded!`);
 });
-});
   bot .on("guildMemberAdd",function(member)
 {
           var mem = member.user;
