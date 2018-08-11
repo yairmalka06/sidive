@@ -21,8 +21,6 @@ const active = new Map();
 
 const fortnite = require('fortnite');
 
-bot.commands = new Discord.Collection();
-
 var ownerID = "279353707567644693";
 
 var bot = new Discord.Client();
