@@ -113,7 +113,7 @@ bot.on("message", function(message){
     active: active
   }
   let commandFile = require(`./Commands/${cmd}.js`);
-  commandFile.run(client, message, args, ops);
+  commandFile.run(bot, message, args, ops);
 
   } catch (e) {
   console.log(e.stack);
