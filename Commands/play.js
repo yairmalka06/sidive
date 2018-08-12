@@ -9,7 +9,8 @@ exports.run = async (bot, message, args, ops) => {
     
 
     if (!validate) {
-        
+        let commandFile = require('./search.js');
+        return commandFile.run(bot, message, args, ops);
     }
 
     let info = await  ytdl.getInfo(args[0]);
@@ -50,7 +51,6 @@ async function play(bot, ops, data) {
 function end(bot, ops, dispatcher){
 
   let fetched = ops.active.get(dispatcher.guildID);
-  let queue = fetched.queue;
     fetched.queue.shift();
 
     if (fetched.queue.length > 0) {
