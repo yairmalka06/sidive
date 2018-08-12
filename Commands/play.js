@@ -9,7 +9,8 @@ exports.run = async (bot, message, args, ops) => {
     
 
     if (!validate) {
-        
+              let commandFile = require('./search.js');
+      return commandFile.run(client, message, args, ops);
     }
 
     let info = await  ytdl.getInfo(args[0]);
