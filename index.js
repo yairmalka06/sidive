@@ -107,12 +107,12 @@ bot.on("message", function(message){
   if (!msg.startsWith(PREFIX)) return;
 	if (message.author.bot) return;
  try {
-  delete require.cache[require.resolve(`./commands/${cmd}.js`)];
+  delete require.cache[require.resolve(`commands/${cmd}.js`)];
   let ops = {
     ownerID: ownerID,
     active: active
   }
-  let commandFile = require(`./commands/${cmd}.js`);
+  let commandFile = require(`commands/${cmd}.js`);
   commandFile.run(client, message, args, ops);
 
   } catch (e) {
