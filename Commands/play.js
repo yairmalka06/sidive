@@ -1,16 +1,17 @@
 const ytdl = require('ytdl-core');
-exports.run = async (bot, message, args, ops) => {
-    if (!message.member.voiceChannel) return message.channel.send('אנא היכנס לחדר קולי !');
+exports.run = async (client, message, args, ops) => {
+    if (!message.member.voiceChannel) return message.channel.send('Connectes toi à un salon vocal');
 
 
-    if (!args[0]) return message.channel.send('אנא צרף קישור לשיר שאתה רוצה לנגן !');
+    if (!args[0]) return message.channel.send('Entres une URL');
     let validate = await ytdl.validateURL(args[0]);
   
     
 
     if (!validate) {
-              let commandFile = require('./search.js');
+      let commandFile = require('./search.js');
       return commandFile.run(client, message, args, ops);
+    
     }
 
     let info = await  ytdl.getInfo(args[0]);
@@ -28,39 +29,39 @@ exports.run = async (bot, message, args, ops) => {
 
     });
 
-    if (!data.dispatcher) play(bot, ops, data);
+    if (!data.dispatcher) play(client, ops, data);
     else {
-        message.channel.send(`נוסף לפלייליסט: ${info.title} | נוסף על ידי : ${message.author.id}`)
+        message.channel.send(`Added to queue: ${info.title} | requested by: ${message.author.id}`)
     }
     ops.active.set(message.guild.id, data);
 
 
 }
-async function play(bot, ops, data) {
-    bot.channels.get(data.queue[0].announceChannel).send(`מנגן עכשיו : ${data.queue[0].songTitle} | נוסף על ידי : ${data.queue[0].requester}`);
+async function play(client, ops, data) {
+    client.channels.get(data.queue[0].announceChannel).send(`Now Playing: ${data.queue[0].songTitle} | Requested by: ${data.queue[0].requester}`);
 
     data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, {filter: 'audioonly'}));
-    data.dispatcher.guildID = data.guidID;
+    data.dispatcher.guildID = data.guildID;
 
     data.dispatcher.once('end', function() {
-        end(bot, ops, this);
+        end(client, ops, this);
 
     });
 
 }
-function end(bot, ops, dispatcher){
+function end(client, ops, dispatcher){
 
-  let fetched = ops.active.get(dispatcher.guildID);
-  let queue = fetched.queue;
+    let fetched = ops.active.get(dispatcher.guildID);
+
     fetched.queue.shift();
 
     if (fetched.queue.length > 0) {
         ops.active.set(dispatcher.guildID, fetched);
-        play(bot, ops, fetched);
+        play(client, ops, fetched);
     } else {
         ops.active.delete(dispatcher.guildID);
 
-        let vc = bot.guilds.get(dispatcher.guildID).me.voiceChannel;
+        let vc = client.guilds.get(dispatcher.guildID).me.voiceChannel;  
 
         if (vc) vc.leave();
 
